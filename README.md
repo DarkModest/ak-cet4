@@ -14,7 +14,7 @@
 
 ## 使用方法
 
-1. 下载 [`ak-cet4.html`](ak-cet4.html)，用 Chrome / Edge 等现代浏览器打开
+1. 打开在线版：<https://darkmodest.github.io/ak-cet4/ak-cet4.html>（或下载 [`ak-cet4.html`](ak-cet4.html) 后用 Chrome / Edge 等现代浏览器本地打开）
 2. **Step 1**：上传一份四级真题 PDF（纯本地解析，文件不会离开你的电脑）
 3. **Step 2**：核对自动提取的题目与答案，可点击文字直接修正
 4. **Step 3**（可选）：选择本地听力音频文件，或从 B 站真题合集里选对应试卷分 P；跳过则自动省去听力部分
