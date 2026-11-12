@@ -22,6 +22,12 @@
 
 > 中途有事离开？直接刷新或关闭页面即可，下次打开会自动询问是否恢复上次考试进度。
 
+## 可搜索真题 PDF
+
+仓库内附了一份由 `CET46-Resources` 整理的 **92 份四级真题 PDF 可搜索版**：`cet4-papers/`。
+原本有文字层的 PDF 原样保留，纯扫描件用离线 OCR 加上了不可见文字层，可直接导入本工具；
+处理清单见 [`cet4-papers/manifest.json`](cet4-papers/manifest.json)，说明见 [`cet4-papers/README.md`](cet4-papers/README.md)，校验结果见 [`cet4-papers/VALIDATION.md`](cet4-papers/VALIDATION.md)。
+
 ## 说明
 
 - 除 B 站听力播放器与 CDN 库（pdf.js、docx）外，所有解析与评分都在浏览器本地完成，试卷与答案不上传任何服务器
