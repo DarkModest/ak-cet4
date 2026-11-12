@@ -476,6 +476,9 @@ body.dark .score-card{box-shadow:var(--shadow-lg)}
 .text-hint{font-size:11px;color:var(--text-tertiary)}
 .text-caption{font-size:12px;color:var(--text-secondary)}
 .match-top{position:sticky;top:0;z-index:2;background:var(--bg-elevated);margin:-16px -16px 10px;padding:16px 16px 8px;border-bottom:1px solid var(--separator)}
+.read-q-card.match-card{display:flex;flex-direction:column;overflow:hidden}
+.match-card .match-top{position:static;flex-shrink:0;margin:0 0 10px;padding:0 0 8px}
+.match-card .match-list{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding-right:2px}
 .match-top .match-count{font-size:11px;color:var(--text-tertiary);margin-bottom:7px;font-variant-numeric:tabular-nums}
 .match-top .match-tip{font-size:11px;color:var(--text-tertiary);margin:7px 0 0;line-height:1.5}
 .match-bank{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;margin-bottom:0}
@@ -2609,6 +2612,8 @@ function switchReadSec(i) {
 function renderReadBody() {
   const sec = EXAM._readData.sections[EXAM._readSecIdx];
   if (!sec) return;
+  const card = document.getElementById('read-q-card');
+  if (card) card.classList.toggle('match-card', sec.type === 'match');
   if (sec.type === 'match' && !EXAM._readSelectedMatch) {
     EXAM._readSelectedMatch = firstUnansweredMatch(sec);
   }
@@ -2948,12 +2953,15 @@ function matchBarHTML(sec) {
 function refreshMatch(sec, focus) {
   const card = document.getElementById('read-q-card');
   const pane = document.getElementById('read-passage-panel');
-  const ct = card ? card.scrollTop : 0;
+  const oldList = card ? card.querySelector('.match-list') : null;
+  const ct = oldList ? oldList.scrollTop : (card ? card.scrollTop : 0);
   const pt = pane ? pane.scrollTop : 0;
   updateReadPassage(sec);
   renderMatchQ(sec);
   updateReadCtrl(sec);
-  if (card) card.scrollTop = ct;
+  const newList = card ? card.querySelector('.match-list') : null;
+  if (newList) newList.scrollTop = ct;
+  else if (card) card.scrollTop = ct;
   if (pane) pane.scrollTop = pt;
   let el = null;
   if (focus && focus.kind === 'para') {
@@ -3103,8 +3111,8 @@ function clearAllMatch() {
   EXAM._matchNote = '已清除全部匹配';
   EXAM._matchNoteWarn = false;
   refreshMatch(sec, { kind: 'stmt', num: EXAM._readSelectedMatch });
-  const card = document.getElementById('read-q-card');
-  if (card) card.scrollTop = 0;
+  const list = document.querySelector('#read-q-card .match-list');
+  if (list) list.scrollTop = 0;
 }
 
 // ---- Careful reading: all questions of the section in one scrollable list ----
