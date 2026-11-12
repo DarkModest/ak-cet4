@@ -3142,8 +3142,10 @@ function renderCarefulQ(sec) {
 }
 
 function pickReadAns(num, val) {
-  EXAM.answers.reading[num] = val;
   const sec = EXAM._readData.sections[EXAM._readSecIdx];
+  if (!sec) return;
+  const same = String(EXAM.answers.reading[num] || '') === String(val);
+  EXAM.answers.reading[num] = same ? '' : val;
   if (sec.type === 'careful') {
     // Keep the list scroll position when re-rendering the picked state.
     const card = document.getElementById('read-q-card');
