@@ -48,6 +48,7 @@
   --fill-purple:   #a855f7;
   --fill-blue-bg:  #e8f2fd;
   --fill-green-bg: #e5f8e9;
+  --fill-green-text:#15803d;
   --fill-red-bg:   #fde9e9;
   --fill-orange-bg:#fef1e7;
   --fill-purple-bg:#f3e8fd;
@@ -91,6 +92,7 @@ body.dark {
   --text-tertiary: #636366;
   --fill-blue-bg:  #1a2a40;
   --fill-green-bg: #1a2a1e;
+  --fill-green-text:#4ade80;
   --fill-red-bg:   #2a1a1c;
   --fill-orange-bg:#2a2218;
   --fill-purple-bg:#241a30;
@@ -122,41 +124,82 @@ a{color:var(--fill-primary)}
 body.dark .topbar-nav .ns:hover{background:rgba(255,255,255,.06)}
 .topbar-nav .ns.active{color:var(--text);font-weight:600;background:rgba(0,0,0,.06)}
 body.dark .topbar-nav .ns.active{background:rgba(255,255,255,.08)}
-.topbar-nav .ns.done{color:var(--fill-green)}
+.topbar-nav .ns.done{color:var(--fill-green-text)}
 .container{max-width:1040px;margin:0 auto;padding:28px 24px}
+@media (max-width:640px){
+  .topbar{margin:8px 10px 0;padding:0 12px;height:48px}
+  .topbar-brand{font-size:14px}
+  .topbar-nav .ns{padding:6px 10px;font-size:11px}
+  .container{padding:18px 12px}
+}
 .scr{display:none}
-.scr.active{display:block}
+.scr.active{display:block;animation:scrFade .2s var(--ease)}
+@keyframes scrFade{from{opacity:0;transform:translateY(4px)}}
 .card{background:var(--bg-elevated);border:1px solid var(--separator);border-radius:var(--r-lg);padding:24px 28px;margin-bottom:18px;box-shadow:var(--shadow-sm)}
 .card h2{font-size:17px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:8px}
 .card .sub{font-size:12px;color:var(--text-secondary);margin-bottom:18px}
+@media (max-width:640px){
+  .card{padding:18px 16px;border-radius:var(--r-md)}
+}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:10px 22px;border-radius:var(--r-full);font-size:13px;font-weight:600;border:none;cursor:pointer;transition:all .2s var(--spring);text-decoration:none;letter-spacing:-.01em}
 .btn:active{transform:scale(.96)}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
 .btn-primary{background:var(--fill-primary);color:#fff}
-.btn-primary:hover{background:var(--fill-primary-hover);box-shadow:0 4px 14px rgba(0,113,227,.3);transform:translateY(-1px)}
+.btn-primary:hover:not(:disabled){background:var(--fill-primary-hover);box-shadow:0 4px 14px rgba(0,113,227,.3);transform:translateY(-1px)}
 .btn-outline{background:var(--bg-elevated);color:var(--text);border:1.5px solid var(--separator-strong)}
-.btn-outline:hover{border-color:var(--fill-primary);background:var(--fill-blue-bg);color:var(--fill-primary)}
+.btn-outline:hover:not(:disabled){border-color:var(--fill-primary);background:var(--fill-blue-bg);color:var(--fill-primary)}
 .btn-success{background:var(--fill-green);color:#fff}
-.btn-success:hover{box-shadow:0 4px 14px rgba(53,199,89,.3);transform:translateY(-1px)}
+.btn-success:hover:not(:disabled){box-shadow:0 4px 14px rgba(53,199,89,.3);transform:translateY(-1px)}
+.btn-danger-ghost{background:transparent;color:var(--fill-red);border:1px solid rgba(235,59,63,.3)}
+.btn-danger-ghost:hover:not(:disabled){background:var(--fill-red-bg);border-color:var(--fill-red)}
+.btn-sm{padding:6px 14px;font-size:12px}
 .btn-lg{padding:14px 28px;font-size:15px}
 .btn-block{width:100%}
-.drop-zone{border:2px dashed var(--separator-strong);border-radius:var(--r-lg);padding:40px;text-align:center;cursor:pointer;transition:all .2s var(--spring);background:var(--bg-elevated)}
-.drop-zone:hover{border-color:var(--fill-primary);background:var(--fill-blue-bg);transform:scale(1.01)}
+.resume-banner{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px 20px;margin-bottom:18px;border-radius:var(--r-lg);background:var(--fill-blue-bg);border:1.5px solid rgba(0,113,227,.28);box-shadow:var(--shadow-sm)}
+.resume-banner[hidden]{display:none}
+.resume-banner .rb-info{min-width:0;flex:1}
+.resume-banner .rb-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px}
+.resume-banner .rb-desc{font-size:12px;color:var(--text-secondary);line-height:1.5}
+.resume-banner .rb-actions{display:flex;gap:8px;flex-shrink:0;flex-wrap:wrap}
+@media (max-width:640px){
+  .resume-banner{flex-direction:column;align-items:stretch}
+  .resume-banner .rb-actions{justify-content:flex-end}
+}
+.drop-zone{border:2px dashed var(--separator-strong);border-radius:var(--r-lg);padding:36px 24px;text-align:center;cursor:pointer;transition:all .2s var(--spring);background:var(--bg-elevated)}
+.drop-zone:hover,.drop-zone.dragover{border-color:var(--fill-primary);background:var(--fill-blue-bg);transform:scale(1.005)}
 .drop-zone .dz-icon{font-size:36px;margin-bottom:8px}
 .drop-zone .dz-title{font-size:14px;font-weight:600;color:var(--text)}
-.drop-zone .dz-hint{font-size:11px;color:var(--text-tertiary);margin-top:4px}
+.drop-zone .dz-hint{font-size:11px;color:var(--text-tertiary);margin-top:4px;line-height:1.6}
 .drop-zone.ok{border-color:var(--fill-green);background:var(--fill-green-bg)}
+.library-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:14px;padding-top:14px;border-top:1px solid var(--separator)}
+.library-row[hidden]{display:none}
+.library-row .lib-label{font-size:12px;font-weight:600;color:var(--text-secondary);white-space:nowrap}
+.library-row .bili-select{max-width:420px;flex:1;min-width:220px}
+.summary-strip{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.summary-strip[hidden]{display:none}
+.sum-pill{display:inline-flex;align-items:center;gap:5px;padding:5px 11px;border-radius:var(--r-full);font-size:11px;font-weight:600;background:var(--bg-inset);color:var(--text-secondary)}
+.sum-pill.ok{background:var(--fill-green-bg);color:var(--fill-green-text)}
+.sum-pill.warn{background:var(--fill-orange-bg);color:var(--fill-orange)}
+.sum-pill.info{background:var(--fill-blue-bg);color:var(--fill-primary)}
 .sec-block{border:1.5px solid var(--separator);border-radius:var(--r-md);padding:16px 20px;margin-bottom:10px;background:var(--bg-elevated)}
-.sec-block .sec-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.sec-block .sec-head{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:8px}
 .tag{font-size:10px;font-weight:700;padding:4px 10px;border-radius:var(--r-sm);letter-spacing:.04em;text-transform:uppercase}
 .tag-writing{background:var(--tag-writing);color:var(--tag-writing-t)}
 .tag-listening{background:var(--tag-listening);color:var(--tag-listening-t)}
 .tag-reading{background:var(--tag-reading);color:var(--tag-reading-t)}
 .tag-translation{background:var(--tag-translation);color:var(--tag-translation-t)}
-.ans-badge{font-size:11px;color:var(--fill-green);display:flex;align-items:center;gap:4px;font-weight:600}
-.sec-block textarea{width:100%;min-height:60px;border:1px solid var(--separator);border-radius:var(--r-sm);padding:12px;font-size:13px;font-family:"Times New Roman","SimSun",serif;resize:vertical;line-height:1.7;background:var(--bg-inset);color:var(--text);transition:border-color .2s var(--ease),box-shadow .2s var(--ease)}
+.tag-keys{background:var(--bg-inset);color:var(--text-secondary)}
+.ans-badge{font-size:11px;color:var(--fill-green-text);display:flex;align-items:center;gap:4px;font-weight:600}
+.sec-block textarea{width:100%;min-height:72px;border:1px solid var(--separator);border-radius:var(--r-sm);padding:12px;font-size:13px;font-family:"Times New Roman","SimSun",serif;resize:vertical;line-height:1.7;background:var(--bg-inset);color:var(--text);transition:border-color .2s var(--ease),box-shadow .2s var(--ease)}
 .sec-block textarea:focus{outline:none;border-color:var(--fill-primary);box-shadow:var(--shadow-ring)}
-.file-row{display:flex;gap:12px;align-items:center;margin-top:12px}
+.sec-details summary{cursor:pointer;list-style:none;user-select:none}
+.sec-details summary::-webkit-details-marker{display:none}
+.sec-details .sec-chevron{font-size:11px;color:var(--text-tertiary);transition:transform .2s var(--ease)}
+.sec-details[open] .sec-chevron{transform:rotate(90deg)}
+.file-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:12px}
 .file-row .file-name{font-size:12px;color:var(--text-secondary)}
+.audio-active-pill{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;margin-top:12px;border-radius:var(--r-full);background:var(--fill-green-bg);color:var(--fill-green-text);font-size:12px;font-weight:600}
+.audio-active-pill[hidden]{display:none}
 body.exam-mode .container{max-width:none}
 #scr-exam .exam-layout{
   display:grid;
@@ -207,11 +250,22 @@ body.side-collapsed #scr-exam .exam-side .stl{display:none}
     border-radius:var(--r-lg);box-shadow:var(--shadow-lg);
   }
 }
-.timer-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;background:var(--bg-elevated);border-radius:var(--r-lg);border:1px solid var(--separator);margin-bottom:16px;box-shadow:var(--shadow-sm);position:sticky;top:74px;z-index:60;scroll-margin-top:74px;overflow:hidden}
+@media (max-width:640px){
+  #scr-exam .exam-layout{grid-template-columns:minmax(0,1fr);padding-left:0}
+  #scr-exam .exam-main{grid-column:1}
+  body.side-collapsed #scr-exam .exam-side{position:fixed;left:8px;top:auto;bottom:14px;z-index:90;width:auto;display:flex;gap:4px;padding:6px 8px;background:var(--bg-glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--separator);border-radius:var(--r-full);box-shadow:var(--shadow-md)}
+  body.side-collapsed #scr-exam .exam-side .side-toggle{width:30px;height:30px;margin:0;border-radius:50%}
+  body.side-collapsed #scr-exam .exam-side .st{padding:0;margin:0}
+}
+.timer-bar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px 12px;padding:14px 20px;background:var(--bg-glass);backdrop-filter:blur(16px) saturate(160%);-webkit-backdrop-filter:blur(16px) saturate(160%);border-radius:var(--r-lg);border:1px solid var(--separator);margin-bottom:16px;box-shadow:var(--shadow-sm);position:sticky;top:72px;z-index:60;scroll-margin-top:72px;overflow:hidden}
 .timer-bar::before{content:'';position:absolute;top:0;left:0;height:3px;width:var(--ux-timer-pct,0%);background:var(--fill-primary);transition:width .8s linear,background .4s var(--ease);border-radius:0 0 2px 2px}
 .timer-bar .sec-label{font-weight:700;font-size:13px;color:var(--text);display:flex;align-items:center;gap:10px}
 .timer-bar .sec-label::before{content:'';width:9px;height:9px;border-radius:50%;background:var(--fill-primary);transition:background .3s}
-.timer-bar .time-num{font-size:34px;font-weight:200;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.timer-bar .time-num{font-size:32px;font-weight:200;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+@media (max-width:640px){
+  .timer-bar{top:64px;padding:12px 14px}
+  .timer-bar .time-num{font-size:26px}
+}
 .timer-bar.warn::before{background:var(--fill-orange)}
 .timer-bar.warn .sec-label::before{background:var(--fill-orange)}
 .timer-bar.warn .time-num{color:var(--fill-orange)}
@@ -257,21 +311,24 @@ body.dark .mcq-opt:hover{background:rgba(255,255,255,.03)}
 .careful-item .mcq-opt{padding:5px 9px;margin-bottom:2px;font-size:12.5px;line-height:1.4;gap:7px;border-radius:10px}
 .careful-item .mcq-letter{width:22px;height:22px;font-size:11px}
 .careful-item .q-num{color:var(--text-secondary);font-variant-numeric:tabular-nums;margin-right:2px}
-.read-tabs{display:flex;gap:0;margin-bottom:12px}
-.read-tab{padding:8px 16px;font-size:12px;font-weight:500;border:none;border-bottom:2px solid transparent;background:none;cursor:pointer;transition:all .2s var(--spring);color:var(--text-secondary)}
+.read-tabs{display:flex;gap:4px;margin-bottom:12px;overflow-x:auto;padding-bottom:2px}
+.read-tab{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;font-size:12.5px;font-weight:500;border:none;border-bottom:2px solid transparent;background:none;cursor:pointer;transition:all .2s var(--spring);color:var(--text-secondary);white-space:nowrap}
 .read-tab:hover{color:var(--text)}
 .read-tab.active{color:var(--fill-primary);font-weight:600;border-bottom-color:var(--fill-primary)}
+.read-tab .rt-badge{font-size:10px;font-weight:700;padding:1px 6px;border-radius:var(--r-full);background:var(--bg-inset);color:var(--text-secondary);font-variant-numeric:tabular-nums}
+.read-tab .rt-badge.done{background:var(--fill-green-bg);color:var(--fill-green-text)}
 .read-layout{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(360px,1fr);gap:16px;align-items:stretch;min-height:520px;height:var(--read-frame-h, calc(100vh - 190px))}
 .read-left{display:flex;flex-direction:column;min-width:0;min-height:0}
-.read-right{min-width:0;min-height:0;display:flex;flex-direction:column;gap:14px}
+.read-right{min-width:0;min-height:0;display:flex;flex-direction:column;gap:12px}
 .read-q-card{flex:1;min-height:0;overflow-y:auto;margin-bottom:0;padding:16px}
+.read-passage,.read-q-card,.match-card .match-list{scrollbar-width:thin;scrollbar-color:var(--separator-strong) transparent}
 @media (max-width: 900px){
   .read-layout{grid-template-columns:minmax(0,1fr);height:auto;min-height:0}
   .read-passage{max-height:60vh}
   .read-q-card{max-height:70vh;flex:none}
 }
-.read-passage{background:var(--bg-elevated);border:1px solid var(--separator);border-radius:var(--r-lg);padding:22px;overflow-y:auto;flex:1;min-height:0;box-shadow:var(--shadow-sm)}
-.passage-text{font-size:15px;line-height:2.1;white-space:pre-wrap;color:var(--text)}
+.read-passage{background:var(--bg-elevated);border:1px solid var(--separator);border-radius:var(--r-lg);padding:22px 24px;overflow-y:auto;flex:1;min-height:0;box-shadow:var(--shadow-sm)}
+.passage-text{font-family:Georgia,"Times New Roman","PingFang SC",serif;font-size:15.5px;line-height:2;white-space:pre-wrap;color:var(--text)}
 .match-bar{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;padding:10px 14px;margin-bottom:10px;background:var(--bg-elevated);border:1px solid var(--separator);border-left:3px solid var(--fill-primary);border-radius:var(--r-sm) var(--r-md) var(--r-md) var(--r-sm);box-shadow:var(--shadow-sm);flex-shrink:0}
 .match-bar[hidden]{display:none}
 .match-bar.done{border-left-color:var(--fill-green)}
@@ -288,7 +345,7 @@ body.dark .mcq-opt:hover{background:rgba(255,255,255,.03)}
 .match-para.is-used{border-left-color:var(--fill-green)}
 .match-para.is-current{border-left-color:var(--fill-primary);background:var(--fill-blue-bg)}
 .match-para .mp-label{font-weight:700;margin-right:6px}
-.match-para .mp-use{display:inline-block;min-width:18px;height:18px;line-height:18px;padding:0 5px;margin-right:4px;border-radius:9px;background:var(--fill-green-bg);color:var(--fill-green);font-size:10px;font-weight:700;text-align:center;vertical-align:2px}
+.match-para .mp-use{display:inline-block;min-width:18px;height:18px;line-height:18px;padding:0 5px;margin-right:4px;border-radius:9px;background:var(--fill-green-bg);color:var(--fill-green-text);font-size:10px;font-weight:700;text-align:center;vertical-align:2px}
 .match-para.is-current .mp-use.cur{background:var(--fill-primary);color:#fff}
 .blank{display:inline-block;min-width:60px;border-bottom:2px solid var(--separator-strong);text-align:center;padding:2px 8px;margin:0 3px;cursor:pointer;transition:all .15s var(--spring);border-radius:3px 3px 0 0;font-size:14px;vertical-align:baseline;color:var(--text-tertiary)}
 .blank-empty{color:var(--text-tertiary)}
@@ -332,11 +389,11 @@ body.dark .score-row:hover{background:rgba(255,255,255,.02)}
 .q-grid{display:flex;flex-wrap:wrap;gap:6px}
 .q-chip{width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:var(--r-sm);font-size:12px;font-weight:600;transition:transform .15s var(--spring);cursor:default}
 .q-chip:hover{transform:scale(1.1)}
-.q-chip.ok{background:var(--fill-green-bg);color:var(--fill-green)}
+.q-chip.ok{background:var(--fill-green-bg);color:var(--fill-green-text)}
 .q-chip.fail{background:var(--fill-red-bg);color:var(--fill-red)}
 .q-chip.na{background:var(--bg-inset);color:var(--text-tertiary)}
 .expand-link{font-size:12px;color:var(--fill-primary);cursor:pointer;margin-top:8px;display:inline-block}
-.export-cols{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:16px}
+.export-cols{max-width:520px;margin:18px auto 0}
 .export-card{border:1px solid var(--separator);border-radius:var(--r-lg);padding:24px;text-align:center;background:var(--bg-elevated);transition:all .2s var(--spring)}
 .export-card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
 .export-card h3{font-size:15px;font-weight:700;margin-bottom:10px}
@@ -390,7 +447,7 @@ body.dark .score-card{box-shadow:var(--shadow-lg)}
 .match-top .match-tip{font-size:11px;color:var(--text-tertiary);margin:7px 0 0;line-height:1.5}
 .match-bank{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;margin-bottom:0}
 .match-bank .wb.match-letter{display:inline-flex;align-items:center;justify-content:center;position:relative;min-height:32px;padding:4px 0;border-radius:10px;font-size:12px;font-weight:700}
-.match-letter .ml-count{position:absolute;top:-5px;right:-3px;min-width:14px;height:14px;line-height:14px;padding:0 4px;border-radius:7px;background:var(--fill-green-bg);color:var(--fill-green);font-size:9px;font-weight:700;text-align:center}
+.match-letter .ml-count{position:absolute;top:-5px;right:-3px;min-width:14px;height:14px;line-height:14px;padding:0 4px;border-radius:7px;background:var(--fill-green-bg);color:var(--fill-green-text);font-size:9px;font-weight:700;text-align:center}
 .match-bank .wb.match-letter:disabled{opacity:.42}
 .match-stmt{display:flex;align-items:flex-start;gap:9px;width:100%;text-align:left;font:inherit;color:var(--text);padding:11px 14px;margin-bottom:6px;border:1.5px solid var(--separator);border-radius:var(--r-md);cursor:pointer;font-size:13px;line-height:1.6;transition:all .2s var(--spring);background:var(--bg-elevated);appearance:none}
 .match-stmt .ms-num{font-weight:700;flex-shrink:0;font-variant-numeric:tabular-nums}
@@ -414,11 +471,11 @@ body.dark .score-card{box-shadow:var(--shadow-lg)}
 .ux-sec-step{font-size:11px;color:var(--text-tertiary);font-variant-numeric:tabular-nums;white-space:nowrap}
 .ux-answered{font-size:11px;font-weight:600;padding:4px 10px;border-radius:var(--r-full);background:var(--bg-inset);color:var(--text-secondary);white-space:nowrap;font-variant-numeric:tabular-nums;transition:background .25s var(--ease),color .25s var(--ease)}
 .ux-answered.partial{background:var(--fill-orange-bg);color:var(--fill-orange)}
-.ux-answered.complete{background:var(--fill-green-bg);color:var(--fill-green)}
+.ux-answered.complete{background:var(--fill-green-bg);color:var(--fill-green-text)}
 .ux-answered:empty{display:none}
 .ux-submit-note{display:inline-block;margin-left:10px;font-size:11px;line-height:1.4;color:var(--text-tertiary);vertical-align:middle;white-space:nowrap}
 .ux-submit-note.warn{color:var(--fill-orange)}
-.ux-submit-note.ok{color:var(--fill-green)}
+.ux-submit-note.ok{color:var(--fill-green-text)}
 .ux-sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 button:focus-visible,a:focus-visible,[tabindex]:focus-visible,.match-stmt:focus-visible,.blank:focus-visible{outline:2px solid var(--fill-primary);outline-offset:2px}
 .mcq-opt:focus-visible{outline-offset:1px}
@@ -430,8 +487,9 @@ button:focus-visible,a:focus-visible,[tabindex]:focus-visible,.match-stmt:focus-
 .btn:active{transform:scale(.96)}
 .read-tab:active{opacity:.75}
 @media (prefers-reduced-motion: reduce){
-  .timer-bar::before{transition:none}
-  .mcq-opt:hover,.word-bank .wb:hover{transform:none}
+  .timer-bar::before,.btn,.topbar-nav .ns,.scr.active{transition:none;animation:none}
+  .timer-bar.danger::before,.timer-bar.danger .sec-label::before,.timer-bar.danger .time-num,.score-card,.confetti-piece{animation:none}
+  .mcq-opt:hover,.word-bank .wb:hover,.btn-primary:hover,.btn-success:hover,.drop-zone:hover{transform:none}
 }
 </style>
 </head>
@@ -440,13 +498,13 @@ button:focus-visible,a:focus-visible,[tabindex]:focus-visible,.match-stmt:focus-
 <header class="topbar">
   <div class="topbar-brand">CET-4 全真模拟</div>
   <div style="display:flex;align-items:center;gap:12px">
-    <div class="topbar-nav" id="topnav">
-      <button class="ns active" data-scr="import">1. 导入试卷</button>
-      <button class="ns" data-scr="exam">2. 答题</button>
-      <button class="ns" data-scr="results">3. 成绩</button>
-      <button class="ns" data-scr="export">4. 导出报告</button>
-    </div>
-    <button class="theme-toggle" id="theme-btn" title="切换外观" onclick="toggleTheme()">◐</button>
+    <nav class="topbar-nav" id="topnav" aria-label="主导航">
+      <button class="ns active" data-scr="import" type="button">1. 导入试卷</button>
+      <button class="ns" data-scr="exam" type="button">2. 答题</button>
+      <button class="ns" data-scr="results" type="button">3. 成绩</button>
+      <button class="ns" data-scr="export" type="button">4. 导出报告</button>
+    </nav>
+    <button class="theme-toggle" id="theme-btn" type="button" title="切换深色/浅色外观" aria-label="切换深色/浅色外观" onclick="toggleTheme()">◐</button>
   </div>
 </header>
 
@@ -454,24 +512,41 @@ button:focus-visible,a:focus-visible,[tabindex]:focus-visible,.match-stmt:focus-
 
 <div class="scr active" id="scr-import">
 
+  <div class="resume-banner" id="resume-banner" hidden>
+    <div class="rb-info">
+      <div class="rb-title" id="resume-title">检测到上次未完成的模拟考试</div>
+      <div class="rb-desc" id="resume-desc"></div>
+    </div>
+    <div class="rb-actions">
+      <button class="btn btn-outline btn-sm" type="button" onclick="discardSavedExam()">放弃进度</button>
+      <button class="btn btn-primary btn-sm" type="button" onclick="resumeSavedExam()">继续上次考试</button>
+    </div>
+  </div>
+
   <div class="card">
     <h2>Step 1 · 上传真题试卷 (PDF)</h2>
     <p class="sub">浏览器本地解析，文件不会上传到任何服务器。</p>
     <div class="drop-zone" id="pdf-zone"
-         ondragover="event.preventDefault();this.style.borderColor='#2563eb';this.style.background='#eff6ff'"
-         ondragleave="this.style.borderColor='';this.style.background=''"
-         ondrop="event.preventDefault();this.style.borderColor='';this.style.background='';handlePDF({target:{files:event.dataTransfer.files}})">
+         ondragover="event.preventDefault();this.classList.add('dragover')"
+         ondragleave="this.classList.remove('dragover')"
+         ondrop="event.preventDefault();this.classList.remove('dragover');handlePDF({target:{files:event.dataTransfer.files}})">
       <div class="dz-icon" id="pdf-icon">📄</div>
       <div class="dz-title" id="pdf-title">拖拽 PDF 到此处，或点击下方按钮选择文件</div>
       <div class="dz-hint" id="pdf-hint">支持 .pdf · 纯本地解析</div>
-      <button class="btn btn-outline" style="margin-top:12px" onclick="event.stopPropagation();document.getElementById('pdf-inp').click()">选择 PDF 文件</button>
+      <button class="btn btn-outline" type="button" style="margin-top:12px" onclick="event.stopPropagation();document.getElementById('pdf-inp').click()">选择 PDF 文件</button>
     </div>
     <input type="file" id="pdf-inp" accept=".pdf" style="display:none" onchange="handlePDF(event)">
+    <div class="library-row" id="paper-library" hidden>
+      <span class="lib-label">或从内置真题库选择：</span>
+      <select id="paper-select" class="bili-select"></select>
+      <button class="btn btn-outline btn-sm" type="button" id="paper-load-btn" onclick="loadLibraryPaper()">加载真题</button>
+    </div>
   </div>
 
   <div class="card" id="review-card">
     <h2>Step 2 · 确认提取内容 & 答案</h2>
-    <p class="sub" id="review-sub">上传 PDF 后自动识别 4 个题型区域并抓取答案。</p>
+    <p class="sub" id="review-sub">上传 PDF 后自动识别 4 个题型区域并抓取答案，所有文本均可直接修正。</p>
+    <div class="summary-strip" id="review-summary" hidden></div>
     <div id="review-sections"></div>
   </div>
 
@@ -479,20 +554,24 @@ button:focus-visible,a:focus-visible,[tabindex]:focus-visible,.match-stmt:focus-
     <h2>Step 3 · 听力音频（可选）</h2>
     <p class="sub">不上传音频则自动跳过听力部分，总考试时间缩减 25 分钟。也可以直接选择 B站合集里对应试卷的听力。</p>
     <div class="file-row">
-      <button class="btn btn-outline btn-sm" onclick="document.getElementById('audio-inp').click()">选择音频文件</button>
+      <button class="btn btn-outline btn-sm" type="button" onclick="document.getElementById('audio-inp').click()">选择音频文件</button>
       <span class="file-name" id="audio-name">未选择文件</span>
       <input type="file" id="audio-inp" accept="audio/*" style="display:none" onchange="handleAudio(event)">
     </div>
     <div class="file-row" style="margin-top:10px">
       <select id="bili-part" class="bili-select" onchange="onBiliSelectChange()"></select>
-      <button class="btn btn-outline" onclick="useBiliAudio()">使用此听力</button>
+      <button class="btn btn-outline btn-sm" type="button" onclick="useBiliAudio()">使用此听力</button>
       <span class="file-name" id="bili-name">未选择</span>
     </div>
-    <p class="text-hint" style="margin-top:6px">按试卷年份/套数选择 B站合集分P；听力页只显示音频控制条，不显示视频。需要联网。P1 为中英试看，未列入。</p>
+    <div class="audio-active-pill" id="audio-active-pill" hidden>
+      <span id="audio-active-label"></span>
+      <button class="btn btn-outline btn-sm" type="button" style="padding:2px 10px;font-size:11px" onclick="clearAudioSelection()">清除音频</button>
+    </div>
+    <p class="text-hint" style="margin-top:8px">按试卷年份/套数选择 B站合集分P；听力页只显示音频控制条，不显示视频。需要联网。P1 为中英试看，未列入。</p>
   </div>
 
   <div class="text-center mt-lg">
-    <button class="btn btn-primary btn-lg" id="btn-start" onclick="startExam()">开始考试 · 预计 <span id="est-time">125</span> 分钟</button>
+    <button class="btn btn-primary btn-lg" type="button" id="btn-start" onclick="startExam()">开始考试 · 预计 <span id="est-time">125</span> 分钟</button>
   </div>
 </div>
 
@@ -517,24 +596,34 @@ button:focus-visible,a:focus-visible,[tabindex]:focus-visible,.match-stmt:focus-
 <div class="scr" id="scr-results">
   <div class="card">
     <h2>成绩单</h2>
-    <div id="results-body"></div>
+    <div id="results-body">
+      <div class="no-ans" style="margin-bottom:0">
+        <div class="no-icon">📝</div>
+        <h3>暂无成绩数据</h3>
+        <p>请先导入真题试卷并完成模拟考试，提交最后一节后将自动生成成绩单。</p>
+        <button class="btn btn-primary" type="button" onclick="goScreen('import')">返回导入试卷</button>
+      </div>
+    </div>
   </div>
 </div>
 
 <div class="scr" id="scr-export">
-  <div class="card" style="text-align:center;padding:40px 28px">
-    <h2>成绩报告已就绪</h2>
-    <p class="sub">MD 报告包含完整答题数据，可直接发给 AI 助手深度分析。</p>
+  <div class="card" style="text-align:center;padding:36px 28px">
+    <h2>AI 分析报告导出</h2>
+    <p class="sub" id="export-sub">导出完整答题数据与内置分析提示词，可直接发给 AI 助手做深度复盘。</p>
     <div class="export-cols">
       <div class="export-card">
         <h3>MD 详细报告</h3>
         <ul>
-          <li>内置 AI 分析提示词</li>
-          <li>完整题目 + 你的答案</li>
-          <li>每题对错 / 语法检测结果</li>
-          <li>复制发给 AI 即可分析</li>
+          <li>内置专业 CET-4 辅导 AI 分析提示词</li>
+          <li>完整题目原文 + 你的作答记录</li>
+          <li>每题对错明细 / 写作与翻译语法检测结果</li>
+          <li>支持下载 .md 文件或一键复制粘贴给 AI</li>
         </ul>
-        <button class="btn btn-primary btn-block" onclick="downloadMD()">下载 .md</button>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="btn btn-primary" type="button" style="flex:1" onclick="downloadMD()">📥 下载 .md</button>
+          <button class="btn btn-outline" type="button" id="copy-md-btn" style="flex:1" onclick="copyMD(this)">📋 一键复制</button>
+        </div>
       </div>
     </div>
   </div>
