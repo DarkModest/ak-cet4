@@ -1,0 +1,4 @@
+# 双文件本地启动器运行时产物
+bili_cache/
+bili_cookie.txt
+__pycache__/
